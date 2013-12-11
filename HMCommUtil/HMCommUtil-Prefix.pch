@@ -6,4 +6,10 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+
+    #ifndef __USE_HMCommon__
+    #define __USE_HMCommon__ (1)
+    #endif
+
 #endif
