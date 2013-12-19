@@ -23,7 +23,10 @@
 #define __USE_SVProgressHUD__ (1)
 #define __USE_SVWebViewController__ (1)
 #define __USE_SoundManager__ (1)
+#define __USE_TTTAttributedLabel__ (1)
+#define __USE_iCarousel__ (1)
 
 #define __USE_QuartzCore__ (1)
+#define __USE_objc_runtime__ (1)
 
 #endif

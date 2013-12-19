@@ -16,5 +16,9 @@
 #import <QuartzCore/QuartzCore.h>
 #endif
 
+#if defined(__USE_objc_runtime__) && __USE_objc_runtime__
+#import <objc/runtime.h>
+#endif
+
 
 #endif

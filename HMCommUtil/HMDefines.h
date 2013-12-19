@@ -208,7 +208,7 @@ dispatch_once(&onceToken, ^{\
 #define IMAGE_REQUEST(TEXT) [NSString stringWithFormat:@"http://image.zontenapp.com.cn/%@/%@",HMCompanyName,TEXT]
 
 #define STATUS_BAR_HEIGHT (20.0f)
-#define NAVIGATION_BAR_HEIGHt (44.0f)
+#define NAVIGATION_BAR_HEIGHT (44.0f)
 #define TAB_BAR_HEIGHT (49.0f)
 #define TOOL_BAR_HEIGHT (44.0f)
 

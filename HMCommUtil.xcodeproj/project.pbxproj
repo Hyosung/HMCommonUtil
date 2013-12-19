@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E278554A18618D25009BA152 /* UIImageView+HM.m in Sources */ = {isa = PBXBuildFile; fileRef = E278554918618D25009BA152 /* UIImageView+HM.m */; };
+		E278554D18618D31009BA152 /* UIButton+HM.m in Sources */ = {isa = PBXBuildFile; fileRef = E278554C18618D31009BA152 /* UIButton+HM.m */; };
 		E2889CD818583425006A5CF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2889CD718583425006A5CF1 /* Foundation.framework */; };
 		E2889CE618583425006A5CF1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2889CE518583425006A5CF1 /* XCTest.framework */; };
 		E2889CE718583425006A5CF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2889CD718583425006A5CF1 /* Foundation.framework */; };
@@ -56,6 +58,8 @@
 		E2889D8B185835D8006A5CF1 /* HMCommon.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2889D001858344E006A5CF1 /* HMCommon.h */; };
 		E2889D8C185835DD006A5CF1 /* HMPrecompiled.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2889D011858344E006A5CF1 /* HMPrecompiled.h */; };
 		E2889D8D185835E5006A5CF1 /* HMCommonSystem.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2889D021858344E006A5CF1 /* HMCommonSystem.h */; };
+		E29AF945185AFF33000CC512 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E29AF944185AFF33000CC512 /* TTTAttributedLabel.m */; };
+		E2BB1F8A185C0CA50046FF6D /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BB1F89185C0CA50046FF6D /* iCarousel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +92,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E278554818618D25009BA152 /* UIImageView+HM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HM.h"; sourceTree = "<group>"; };
+		E278554918618D25009BA152 /* UIImageView+HM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HM.m"; sourceTree = "<group>"; };
+		E278554B18618D31009BA152 /* UIButton+HM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+HM.h"; sourceTree = "<group>"; };
+		E278554C18618D31009BA152 /* UIButton+HM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+HM.m"; sourceTree = "<group>"; };
 		E2889CD418583425006A5CF1 /* libHMCommUtil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHMCommUtil.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2889CD718583425006A5CF1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E2889CDB18583425006A5CF1 /* HMCommUtil-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HMCommUtil-Prefix.pch"; sourceTree = "<group>"; };
@@ -183,6 +191,10 @@
 		E2889D6618583493006A5CF1 /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewController.h; sourceTree = "<group>"; };
 		E2889D6718583493006A5CF1 /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
 		E2889D8518583509006A5CF1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E29AF943185AFF33000CC512 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		E29AF944185AFF33000CC512 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		E2BB1F88185C0CA50046FF6D /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		E2BB1F89185C0CA50046FF6D /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +305,10 @@
 				E2889D0D1858347A006A5CF1 /* NSString+Base64.m */,
 				E2889D0E1858347A006A5CF1 /* NSString+md5.h */,
 				E2889D0F1858347A006A5CF1 /* NSString+md5.m */,
+				E278554818618D25009BA152 /* UIImageView+HM.h */,
+				E278554918618D25009BA152 /* UIImageView+HM.m */,
+				E278554B18618D31009BA152 /* UIButton+HM.h */,
+				E278554C18618D31009BA152 /* UIButton+HM.m */,
 			);
 			path = HMExpand;
 			sourceTree = "<group>";
@@ -300,10 +316,12 @@
 		E2889D1518583493006A5CF1 /* HMExternal */ = {
 			isa = PBXGroup;
 			children = (
+				E2889D3218583493006A5CF1 /* HMExternal.h */,
+				E2BB1F87185C0CA50046FF6D /* iCarousel */,
+				E29AF942185AFF33000CC512 /* TTTAttributedLabel */,
 				E2889D1618583493006A5CF1 /* ASIHttpRequest */,
 				E2889D2B18583493006A5CF1 /* ChineseToPinyin */,
 				E2889D2E18583493006A5CF1 /* GTMBase64 */,
-				E2889D3218583493006A5CF1 /* HMExternal.h */,
 				E2889D3318583493006A5CF1 /* PullingRefreshTableView */,
 				E2889D3718583493006A5CF1 /* Reachability */,
 				E2889D3A18583493006A5CF1 /* SDWebImage */,
@@ -477,6 +495,24 @@
 			path = SVWebViewController;
 			sourceTree = "<group>";
 		};
+		E29AF942185AFF33000CC512 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				E29AF943185AFF33000CC512 /* TTTAttributedLabel.h */,
+				E29AF944185AFF33000CC512 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
+		E2BB1F87185C0CA50046FF6D /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				E2BB1F88185C0CA50046FF6D /* iCarousel.h */,
+				E2BB1F89185C0CA50046FF6D /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -559,6 +595,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2889D7718583493006A5CF1 /* UIImage+GIF.m in Sources */,
+				E278554A18618D25009BA152 /* UIImageView+HM.m in Sources */,
 				E2889D141858347A006A5CF1 /* NSString+md5.m in Sources */,
 				E2889D6E18583493006A5CF1 /* ASIInputStream.m in Sources */,
 				E2889D101858347A006A5CF1 /* NSData+AES256.m in Sources */,
@@ -579,11 +616,13 @@
 				E2889D7C18583493006A5CF1 /* SDWebImageDownloaderOperation.m in Sources */,
 				E2889D111858347A006A5CF1 /* NSData+Base64.m in Sources */,
 				E2889D7218583493006A5CF1 /* PullingRefreshTableView.m in Sources */,
+				E2BB1F8A185C0CA50046FF6D /* iCarousel.m in Sources */,
 				E2889D8218583493006A5CF1 /* SVProgressHUD.m in Sources */,
 				E2889D6F18583493006A5CF1 /* ASINetworkQueue.m in Sources */,
 				E2889D7418583493006A5CF1 /* SDImageCache.m in Sources */,
 				E2889D7518583493006A5CF1 /* NSData+GIF.m in Sources */,
 				E2889D7E18583493006A5CF1 /* SDWebImageDecoder.m in Sources */,
+				E278554D18618D31009BA152 /* UIButton+HM.m in Sources */,
 				E2889D7B18583493006A5CF1 /* SDWebImageDownloader.m in Sources */,
 				E2889D8318583493006A5CF1 /* SVModalWebViewController.m in Sources */,
 				E2889D8018583493006A5CF1 /* SDWebImagePrefetcher.m in Sources */,
@@ -593,6 +632,7 @@
 				E2889D7F18583493006A5CF1 /* SDWebImageManager.m in Sources */,
 				E2889D7318583493006A5CF1 /* Reachability.m in Sources */,
 				E2889D131858347A006A5CF1 /* NSString+Base64.m in Sources */,
+				E29AF945185AFF33000CC512 /* TTTAttributedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,6 +817,7 @@
 				E2889CF918583425006A5CF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E2889CFA18583425006A5CF1 /* Build configuration list for PBXNativeTarget "HMCommUtilTests" */ = {
 			isa = XCConfigurationList;
@@ -785,6 +826,7 @@
 				E2889CFC18583425006A5CF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

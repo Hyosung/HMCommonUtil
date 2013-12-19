@@ -151,7 +151,7 @@
     if (self.navigationController) {
         isThereNav = YES;
     }
-    mainWebView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (self.navigationController.isToolbarHidden?0:TOOL_BAR_HEIGHT) - (isThereNav?NAVIGATION_BAR_HEIGHt:0) - STATUS_BAR_HEIGHT);
+    mainWebView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (self.navigationController.isToolbarHidden?0:TOOL_BAR_HEIGHT) - (isThereNav?NAVIGATION_BAR_HEIGHT:0) - STATUS_BAR_HEIGHT);
 }
 
 - (void)loadView {

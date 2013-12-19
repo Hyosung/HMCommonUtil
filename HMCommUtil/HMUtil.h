@@ -65,6 +65,14 @@ extern inline NSString * UUID();
 + (UIImage *)getImageFromView:(UIView *) orgView;
 
 /*
+ 将多张图片合成一张
+ @images 例:@[ @{ @"image": image1,@"rect": @"{{0,0},{120,120}}" },@{ @"image": image2,@"rect": @"{{120,0},{120,120}}" }]
+ @size 合成图片的大小
+ @return 合成的图片
+ */
++ (UIImage *)imageSynthesisWithImages:(NSArray *) images andSize:(CGSize) size;
+
+/*
  保存图片到相册
  */
 + (void)savePhotosAlbum:(UIImage *)image;
@@ -95,12 +103,12 @@ extern inline NSString * UUID();
                           isHeight:(BOOL)flag
                             number:(CGFloat)number;
 /*
- 知道高度重置图片大小
+ 知道高度，重置图片大小
  */
 + (UIImage *)resizedImageWithImage:(UIImage *)image
                             orHeight:(CGFloat)height;
 /*
- 知道宽度重置图片大小
+ 知道宽度，重置图片大小
  */
 + (UIImage *)resizedImageWithImage:(UIImage *)image
                             orWidth:(CGFloat)width;
@@ -167,6 +175,13 @@ extern inline NSString * UUID();
 + (UIImage *)drawGradientColor:(CGRect)p_clipRect
                   options:(CGGradientDrawingOptions)p_options
                    colors:(NSArray *)p_colors;
+
+/*
+ 计算文本size
+ @aStr 文本内容
+ @font 字体
+ */
++ (CGSize)computeSizeWithString:(NSString *) aStr font:(UIFont *) font;
 
 /*
  计算文本宽度
@@ -240,6 +255,12 @@ extern inline NSString * UUID();
          backgroundImage:(UIImage *) image;
 
 /*
+ 给导航栏添加一个view覆盖在上面
+ */
++ (void)setNavigationBar:(UINavigationBar *)navBar
+             contentView:(UIView *)view;
+
+/*
  当请求返回无数据时显示
  @flag 是否显示
  @view 显示提示的view
@@ -288,5 +309,113 @@ extern inline NSString * UUID();
                                                     parameter:(NSDictionary *) param
                                                       succeed:(void (^)(ASIFormDataRequest *request)) blockSucceed
                                                        failed:(void (^)(ASIFormDataRequest *request, NSError *error)) blockFailed;
+
+/*
+ 创建一个异步POST请求
+ */
++ (ASIFormDataRequest *)createAsynchronousRequestWithURLString:(NSString *) theUrl
+                                                     parameter:(NSDictionary *) param;
+
+/*
+ 开启一个异步队列
+ */
++ (ASINetworkQueue *)startNetworkQueueWithRequests:(NSArray *) requests
+                                    requestSucceed:(void (^)(ASIHTTPRequest *request)) requestBlockSucceed
+                                     requestFailed:(void (^)(ASIHTTPRequest *request, NSError *error)) requestBlockFailed
+                                      queueSucceed:(void (^)(ASINetworkQueue *queue)) queueBlock;
+#endif
+
+#if defined(__USE_QuartzCore__) && __USE_QuartzCore__
+/**********************************************常用动画************************************************/
+#pragma mark - Custom Animation
+
+/**
+ *   @brief 快速构建一个你自定义的动画,有以下参数供你设置.
+ *
+ *   @note  调用系统预置Type需要在调用类引入下句
+ *
+ *          #import <QuartzCore/QuartzCore.h>
+ *
+ *   @param type                动画过渡类型
+ *   @param subType             动画过渡方向(子类型)
+ *   @param duration            动画持续时间
+ *   @param timingFunction      动画定时函数属性
+ *   @param theView             需要添加动画的view.
+ *
+ *
+ */
+
++ (void)showAnimationType:(NSString *)type
+              withSubType:(NSString *)subType
+                 duration:(CFTimeInterval)duration
+           timingFunction:(NSString *)timingFunction
+                     view:(UIView *)theView;
+
+#pragma mark - Preset Animation
+
+/**
+ *  下面是一些常用的动画效果
+ */
+
+// reveal
++ (void)animationRevealFromBottom:(UIView *)view;
++ (void)animationRevealFromTop:(UIView *)view;
++ (void)animationRevealFromLeft:(UIView *)view;
++ (void)animationRevealFromRight:(UIView *)view;
+
+// 渐隐渐消
++ (void)animationEaseIn:(UIView *)view;
++ (void)animationEaseOut:(UIView *)view;
+
+// 翻转
++ (void)animationFlipFromLeft:(UIView *)view;
++ (void)animationFlipFromRigh:(UIView *)view;
+
+// 翻页
++ (void)animationCurlUp:(UIView *)view;
++ (void)animationCurlDown:(UIView *)view;
+
+// push
++ (void)animationPushUp:(UIView *)view;
++ (void)animationPushDown:(UIView *)view;
++ (void)animationPushLeft:(UIView *)view;
++ (void)animationPushRight:(UIView *)view;
+
+// move
++ (void)animationMoveUp:(UIView *)view duration:(CFTimeInterval)duration;
++ (void)animationMoveDown:(UIView *)view duration:(CFTimeInterval)duration;
++ (void)animationMoveLeft:(UIView *)view;
++ (void)animationMoveRight:(UIView *)view;
+
+// 旋转缩放
+
+// 各种旋转缩放效果
++ (void)animationRotateAndScaleEffects:(UIView *)view;
+
+// 旋转同时缩小放大效果
++ (void)animationRotateAndScaleDownUp:(UIView *)view;
+
+
+
+#pragma mark - Private API
+
+/**
+ *  下面动画里用到的某些属性在当前API里是不合法的,但是也可以用.
+ */
+
++ (void)animationFlipFromTop:(UIView *)view;
++ (void)animationFlipFromBottom:(UIView *)view;
+
++ (void)animationCubeFromLeft:(UIView *)view;
++ (void)animationCubeFromRight:(UIView *)view;
++ (void)animationCubeFromTop:(UIView *)view;
++ (void)animationCubeFromBottom:(UIView *)view;
+
++ (void)animationSuckEffect:(UIView *)view;
+
++ (void)animationRippleEffect:(UIView *)view;
+
++ (void)animationCameraOpen:(UIView *)view;
++ (void)animationCameraClose:(UIView *)view;
 #endif
 @end

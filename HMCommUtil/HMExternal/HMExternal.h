@@ -21,6 +21,7 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 #import "ASIHTTPRequestDelegate.h"
+#import "ASINetworkQueue.h"
 #endif
 
 #if defined(__USE_PullingRefreshTableView__) && __USE_PullingRefreshTableView__
@@ -47,6 +48,14 @@
 
 #if defined(__USE_SoundManager__) && __USE_SoundManager__
 #import "SoundManager.h"
+#endif
+
+#if defined(__USE_TTTAttributedLabel__) && __USE_TTTAttributedLabel__
+#import "TTTAttributedLabel.h"
+#endif
+
+#if defined(__USE_iCarousel__) && __USE_iCarousel__
+#import "iCarousel.h"
 #endif
 
 #endif
