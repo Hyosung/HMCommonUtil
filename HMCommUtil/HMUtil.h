@@ -102,6 +102,13 @@ extern inline NSString * UUID();
 + (UIImage *)resizedImageWithImage:(UIImage *)image
                           isHeight:(BOOL)flag
                             number:(CGFloat)number;
+
+/*
+ 重置图片的大小，图片不变形，只压缩
+ @size 图片大小
+ */
++ (UIImage *)resizedImageWithImage:(UIImage *)image
+                              size:(CGSize)size;
 /*
  知道高度，重置图片大小
  */
@@ -177,14 +184,14 @@ extern inline NSString * UUID();
                    colors:(NSArray *)p_colors;
 
 /*
- 计算文本size
+ 计算文本size 只针对单行
  @aStr 文本内容
  @font 字体
  */
 + (CGSize)computeSizeWithString:(NSString *) aStr font:(UIFont *) font;
 
 /*
- 计算文本宽度
+ 计算文本宽度 只针对多行
  @aStr 文本内容
  @font 字体
  @height 默认高度
@@ -192,7 +199,7 @@ extern inline NSString * UUID();
 + (CGFloat)computeWidthWithString:(NSString *) aStr font:(UIFont *) font height:(CGFloat) height;
 
 /*
- 计算文本的高度
+ 计算文本的高度 只针对多行
  @aStr 文本内容
  @font 字体
  @width 默认宽度

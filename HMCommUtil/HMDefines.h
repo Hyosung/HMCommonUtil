@@ -195,31 +195,37 @@ dispatch_once(&onceToken, ^{\
 #define END_SINGLETON });
 
 /*
- 用于在Apple Store上请求当前Apple ID 的相关信息的链接
- */
-#define APP_URL [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",HMAppleID]
-
-/*
  用于在浏览器中跳转到App Store应用中去的链接 并跳转到评分页面
  */
 #define SCORE_URL [NSString stringWithFormat:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@",HMAppleID]
 
-#define DATA_REQUEST(TEXT) [NSString stringWithFormat:@"http://app.zontenapp.com.cn/%@",TEXT]
-#define IMAGE_REQUEST(TEXT) [NSString stringWithFormat:@"http://image.zontenapp.com.cn/%@/%@",HMCompanyName,TEXT]
+/*
+ 用于在Apple Store上请求当前Apple ID 的相关信息的链接
+ */
+#define APP_URL [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",HMAppleID]
 
-#define STATUS_BAR_HEIGHT (20.0f)
+#define IMAGE_REQUEST(TEXT) [NSString stringWithFormat:@"http://image.zontenapp.com.cn/%@/%@",HMCompanyName,TEXT]
+#define DATA_REQUEST(TEXT) [NSString stringWithFormat:@"http://app.zontenapp.com.cn/%@",TEXT]
+
 #define NAVIGATION_BAR_HEIGHT (44.0f)
-#define TAB_BAR_HEIGHT (49.0f)
+#define STATUS_BAR_HEIGHT (20.0f)
 #define TOOL_BAR_HEIGHT (44.0f)
+#define TAB_BAR_HEIGHT (49.0f)
+#define SCREEN_HEIGHT CGRectGetHeight([UIScreen mainScreen].bounds)
+#define SCREEN_WIDTH CGRectGetWidth([UIScreen mainScreen].bounds)
+
+#define APP_CONTENT_NOT_NAV (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT)
+#define APP_CONTENT_NOT_TAB (SCREEN_HEIGHT - TAB_BAR_HEIGHT - STATUS_BAR_HEIGHT)
+#define APP_CONTENT_HEIGHT (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT - TAB_BAR_HEIGHT)
 
 /*
  故事板
  */
 #define MAIN_STORYBOARD [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil]
 
-#define APP_SHARE [UIApplication sharedApplication]
 #define USER_DEFAULT [NSUserDefaults standardUserDefaults]
 #define FILE_MANAGER [NSFileManager defaultManager]
+#define APP_SHARE [UIApplication sharedApplication]
 
 #pragma mark - degrees/radian functions
 /*
@@ -229,25 +235,41 @@ dispatch_once(&onceToken, ^{\
 #define RadiansToDegrees(radians) ((radians) * 180.0 / M_PI)
 
 #pragma mark - color functions
-#define COLORRGB(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
-#define COLORRGBA(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
-#define COLORHEX(hex) [UIColor colorWithRed:((float)(((hex) & 0xFF0000) >> 16))/255.0 green:((float)(((hex) & 0xFF00) >> 8))/255.0 blue:((float)((hex) & 0xFF))/255.0 alpha:1.0]
-#define COLORHEXA(hex,a) [UIColor colorWithRed:((float)(((hex) & 0xFF0000) >> 16))/255.0 green:((float)(((hex) & 0xFF00) >> 8))/255.0 blue:((float)((hex) & 0xFF))/255.0 alpha:(a)]
+
+#define COLORHEXA(hex,a) [UIColor colorWithRed:((float)(((hex) & 0xFF0000) >> 16)) / 255.0 \
+                                         green:((float)(((hex) & 0xFF00) >> 8)) / 255.0    \
+                                          blue:((float)((hex) & 0xFF)) / 255.0             \
+                                         alpha:(a)]
+
+#define COLORRGBA(r,g,b,a) [UIColor colorWithRed:(r) / 255.0f                              \
+                                           green:(g) / 255.0f                              \
+                                            blue:(b) / 255.0f                              \
+                                           alpha:(a)]
+
+#define COLORRGB(r,g,b) [UIColor colorWithRed:(r) / 255.0f                                 \
+                                        green:(g) / 255.0f                                 \
+                                         blue:(b) / 255.0f                                 \
+                                        alpha:1.0]
+
+#define COLORHEX(hex) [UIColor colorWithRed:((float)(((hex) & 0xFF0000) >> 16)) / 255.0    \
+                                      green:((float)(((hex) & 0xFF00) >> 8)) / 255.0       \
+                                       blue:((float)((hex) & 0xFF)) / 255.0                \
+                                      alpha:1.0]
 
 #define APP_CACHES  [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define APP_LIBRARY [NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0]
 #define APP_DOCUMENT [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+
 #define CUT_PLAN(HM_IMAGE,HM_RECT) [UIImage imageWithCGImage:CGImageCreateWithImageInRect([HM_IMAGE CGImage], HM_RECT)]
 
-#define SCREEN_WIDTH CGRectGetWidth([UIScreen mainScreen].bounds)
-#define SCREEN_HEIGHT CGRectGetHeight([UIScreen mainScreen].bounds)
 #define SAFE_RELEASE(x) [x release];x=nil
-#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+
 #define CurrentSystemVersion ([[UIDevice currentDevice] systemVersion])
-#define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
-#define CurrentPhone [[UIDevice currentDevice] model]
 #define CurrentOrientation [[UIDevice currentDevice] orientation]
 #define StatusOrientation [UIApplication sharedApplication].statusBarOrientation
+#define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
+#define CurrentPhone [[UIDevice currentDevice] model]
+#define IOS_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 
 #define HMSTR(fmt,...) [NSString stringWithFormat:(fmt),##__VA_ARGS__]
 
@@ -261,7 +283,7 @@ dispatch_once(&onceToken, ^{\
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 #define IOS7_AND_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
 #else
-#define IOS7_AND_LATER NO
+#define IOS7_AND_LATER (0)
 #endif
 
 //#if IOS7_AND_LATER

@@ -18,4 +18,8 @@
 #import "NSString+md5.h"
 #import "NSObject+Property.h"
 
+#import "UIImageView+HM.h"
+#import "UIButton+HM.h"
+#import "UIAlertView+HM.h"
+
 #endif

@@ -10,6 +10,8 @@
 
 @interface UIImageView (HM)
 
+#if defined(__USE_SDWebImage__) && __USE_SDWebImage__
 - (void)setHmImageURLString:(NSString *) anURLString;
+#endif
 
 @end

@@ -11,5 +11,5 @@
     #ifndef __USE_HMCommon__
     #define __USE_HMCommon__ (1)
     #endif
-
+    #import "HMCommon.h"
 #endif

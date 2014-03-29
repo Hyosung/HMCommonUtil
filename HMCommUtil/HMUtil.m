@@ -96,7 +96,7 @@ inline NSString * UUID() {
 }
 
 + (UIImage *)getImageFromView:(UIView *)orgView {
-    UIGraphicsBeginImageContext(orgView.bounds.size);
+    UIGraphicsBeginImageContextWithOptions(orgView.bounds.size, NO, [UIScreen mainScreen].scale);
     
     [orgView.layer renderInContext:UIGraphicsGetCurrentContext()];
     
@@ -195,14 +195,13 @@ inline NSString * UUID() {
 
 + (UIImage *)zoomImageWithSize:(CGSize)size image:(UIImage *)image {
     UIImage *newImage = nil;
-    UIGraphicsBeginImageContextWithOptions(size,YES,0);
+    UIGraphicsBeginImageContextWithOptions(size,NO,[UIScreen mainScreen].scale);
     CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0, size.height);
     CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1, -1);
     CGContextDrawImage(
                        UIGraphicsGetCurrentContext(),
                        CGRectMake(0, 0, size.width, size.height),
-                       [image CGImage]
-                       );
+                       [image CGImage]);
     newImage=UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
@@ -218,9 +217,25 @@ inline NSString * UUID() {
         size = CGSizeMake(number, [HMUtil reckonWithSize:image.size width:number]);
     }
     
-    UIGraphicsBeginImageContextWithOptions(size, NO, 0.0f);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     [image drawInRect:CGRectMake(0.0f, 0.0f, size.width, size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
++ (UIImage *)resizedImageWithImage:(UIImage *)image size:(CGSize)size {
+    UIImage *newImage = nil;
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    CGFloat newWidth = (image.size.width > size.width) ? size.width : image.size.width;
+    CGFloat newHeight = [HMUtil reckonWithSize:image.size width:newWidth];
+    newHeight = (newHeight > size.height) ? size.height : newHeight;
+    [image drawInRect:CGRectMake(
+                                 size.width / 2 - newWidth / 2,
+                                 size.height / 2 - newHeight / 2,
+                                 newWidth,
+                                 newHeight)];
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
 }
@@ -340,7 +355,7 @@ inline NSString * UUID() {
     UIImage *oldImage = [UIImage imageNamed:PLACEHOLDER_NAME];
     UIImage *newImage = nil;
     
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     
     CGContextRef contextRef = UIGraphicsGetCurrentContext();
     [color setFill];
@@ -377,7 +392,7 @@ inline NSString * UUID() {
 
 + (UIImage *)drawingColor:(UIColor *)color size:(CGSize)size {
     UIImage *image = nil;
-    UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
     [color setFill];
     CGContextFillRect(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, size.width, size.height));
     image = UIGraphicsGetImageFromCurrentImageContext();
@@ -392,7 +407,7 @@ inline NSString * UUID() {
                        options:(CGGradientDrawingOptions)p_options
                         colors:(NSArray *)p_colors {
     UIImage *newImage = nil;
-    UIGraphicsBeginImageContext(p_clipRect.size);
+    UIGraphicsBeginImageContextWithOptions(p_clipRect.size, NO, [UIScreen mainScreen].scale);
     CGContextRef p_context = UIGraphicsGetCurrentContext();
     
     CGContextSaveGState(p_context);// 保持住现在的context
@@ -784,14 +799,14 @@ inline NSString * UUID() {
 
 #if defined(__USE_ASIHttpRequest__) && __USE_ASIHttpRequest__
 
-#undef HMASI_REQUEST_SUCCEED_KEY
-#define HMASI_REQUEST_SUCCEED_KEY "ASINetworkQueue.requestDidFinishSelector"
+#undef HMASIRequestSucceedKey
+#define HMASIRequestSucceedKey "ASINetworkQueue.requestDidFinishSelector"
 
-#undef HMASI_REQUEST_FAILED_KEY
-#define HMASI_REQUEST_FAILED_KEY "ASINetworkQueue.requestDidFailSelector"
+#undef HMASIRequestFailedKey
+#define HMASIRequestFailedKey "ASINetworkQueue.requestDidFailSelector"
 
-#undef HMASI_QUEUE_SUCCEED_KEY
-#define HMASI_QUEUE_SUCCEED_KEY "ASINetworkQueue.queueDidFinishSelector"
+#undef HMASINetworkQueueSucceedKey
+#define HMASINetworkQueueSucceedKey "ASINetworkQueue.queueDidFinishSelector"
 
 
 + (ASIFormDataRequest *)startAsynchronousRequestWithURLString:(NSString *)theUrl
@@ -850,9 +865,9 @@ inline NSString * UUID() {
         }
     }];
     
-    objc_setAssociatedObject(self, HMASI_REQUEST_SUCCEED_KEY, requestBlockSucceed, OBJC_ASSOCIATION_COPY);
-    objc_setAssociatedObject(self, HMASI_REQUEST_FAILED_KEY, requestBlockFailed, OBJC_ASSOCIATION_COPY);
-    objc_setAssociatedObject(self, HMASI_QUEUE_SUCCEED_KEY, queueBlock, OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, HMASIRequestSucceedKey, requestBlockSucceed, OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, HMASIRequestFailedKey, requestBlockFailed, OBJC_ASSOCIATION_COPY);
+    objc_setAssociatedObject(self, HMASINetworkQueueSucceedKey, queueBlock, OBJC_ASSOCIATION_COPY);
     [queue go];
 
     return queue;
@@ -863,21 +878,21 @@ inline NSString * UUID() {
  */
 
 + (void)requestDidFinishSelector:(ASIHTTPRequest *) request {
-    void (^block)(ASIHTTPRequest *request) = objc_getAssociatedObject(self, HMASI_REQUEST_SUCCEED_KEY);
+    void (^block)(ASIHTTPRequest *request) = objc_getAssociatedObject(self, HMASIRequestSucceedKey);
     if (block) {
         block(request);
     }
 }
 
 + (void)requestDidFailSelector:(ASIHTTPRequest *) request {
-    void (^block)(ASIHTTPRequest *request,NSError *error) = objc_getAssociatedObject(self, HMASI_REQUEST_FAILED_KEY);
+    void (^block)(ASIHTTPRequest *request,NSError *error) = objc_getAssociatedObject(self, HMASIRequestFailedKey);
     if (block) {
         block(request,request.error);
     }
 }
 
 + (void)queueDidFinishSelector:(ASINetworkQueue *) queue {
-    void (^block)(ASINetworkQueue *queue) = objc_getAssociatedObject(self, HMASI_QUEUE_SUCCEED_KEY);
+    void (^block)(ASINetworkQueue *queue) = objc_getAssociatedObject(self, HMASINetworkQueueSucceedKey);
     if (block) {
         block(queue);
     }

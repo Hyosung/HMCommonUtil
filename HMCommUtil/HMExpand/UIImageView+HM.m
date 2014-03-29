@@ -8,12 +8,22 @@
 
 #import "UIImageView+HM.h"
 
-#import "UIImageView+WebCache.h"
-
 @implementation UIImageView (HM)
 
+#if defined(__USE_SDWebImage__) && __USE_SDWebImage__
 - (void)setHmImageURLString:(NSString *)anURLString {
-//    self setImageWithURL:[NSURL URLWithString:anURLString] placeholderImage:] completed:<#^(UIImage *image, NSError *error, SDImageCacheType cacheType)completedBlock#>
+    NSURL *URL = [NSURL URLWithString:anURLString];
+    UIImage *placeholderImage = [HMUtil drawPlaceholderWithSize:self.frame.size];
+    __weak typeof(self) weakSelf = self;
+    [self setImageWithURL:URL placeholderImage:placeholderImage
+                completed:^(UIImage *image,NSError *error,SDImageCacheType cacheType) {
+        if (image && !error) {
+            
+            UIImage *newImage = [HMUtil zoomImageWithSize:weakSelf.frame.size image:image];
+            weakSelf.image = newImage;
+        }
+    }];
 }
+#endif
 
 @end
