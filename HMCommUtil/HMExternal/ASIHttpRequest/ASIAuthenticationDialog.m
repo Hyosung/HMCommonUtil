@@ -216,10 +216,19 @@ static const NSUInteger kDomainSection = 1;
 
 + (void)dismiss
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 7000
+    
 	if ([sharedDialog respondsToSelector:@selector(presentingViewController)])
 		[[sharedDialog presentingViewController] dismissModalViewControllerAnimated:YES];
-	else 
+	else
 		[[sharedDialog parentViewController] dismissModalViewControllerAnimated:YES];
+#else
+    
+	if ([sharedDialog respondsToSelector:@selector(presentingViewController)])
+		[[sharedDialog presentingViewController] dismissViewControllerAnimated:YES completion:NULL];
+	else
+		[[sharedDialog parentViewController] dismissViewControllerAnimated:YES completion:NULL];
+#endif
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -233,7 +242,10 @@ static const NSUInteger kDomainSection = 1;
 
 - (void)dismiss
 {
-	if (self == sharedDialog) {
+    
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 7000
+    
+    if (self == sharedDialog) {
 		[[self class] dismiss];
 	} else {
 		if ([self respondsToSelector:@selector(presentingViewController)])
@@ -241,6 +253,17 @@ static const NSUInteger kDomainSection = 1;
 		else
 			[[self parentViewController] dismissModalViewControllerAnimated:YES];
 	}
+#else
+    
+    if (self == sharedDialog) {
+		[[self class] dismiss];
+	} else {
+		if ([self respondsToSelector:@selector(presentingViewController)])
+			[[self presentingViewController] dismissViewControllerAnimated:YES completion:NULL];
+		else
+			[[self parentViewController] dismissViewControllerAnimated:YES completion:NULL];
+	}
+#endif
 }
 
 - (void)showTitle
